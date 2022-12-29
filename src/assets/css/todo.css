@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap');
+* {
+  box-sizing: inherit;
+}
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+ol,
+ul {
+  list-style: none;
+}
+body {
+    font-family: 'Space Grotesk', sans-serif;
+  text-align: center;
+}
+h1 {
+  font-size: 170px;
+  color: #4DB5A6;
+  font-weight: 200;
+}
+.todo-status-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.todo-status-item {
+    font-size: 2rem;
+    background-color:#4DB5A6;
+     color: #fff;
+     padding: 8px 32px;
+     border-radius: 25px;
+}
+.todo-status-item:nth-child(2){
+    margin: 0 40px;
+}
+.todo-input{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #4DB5A6;
+    border-radius: 5px;
+    width: 40%;
+    margin: 32px auto;
+}
+.todo-input input{
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    padding: 8px;
+}
+.todo-input .task__add{
+    color: #fff;
+    font-size: 24px;
+    font-weight: 400;
+    background-color: #4DB5A6;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+.todo-list{
+    width: 40%;
+    margin: auto;
+}
+.todo-list-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid #4DB5A6;
+    padding: 20px 32px;
+}
+.item-name{
+    font-size: 20px;
+    color: #7f7f7f;
+}
+.item-status{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
+.task__delete{
+    font-size: 30px;
+    color: #7f7f7f;
+    cursor: pointer;
+}
+.task__check{
+    font-size: 30px;
+    color: #4DB5A6;
+    margin-top: 10px;
+    cursor: pointer;
+}

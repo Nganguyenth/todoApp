@@ -1,20 +1,12 @@
 import React from 'react';
-import './App.css';
+import Todo from './features/Todo';
 
 function App (): JSX.Element {
   return (
-    <div className='App'>
-      Ngà
-    </div>
+    <React.Fragment>
+      <Todo/>
+    </React.Fragment>
   );
 }
 
 export default App;
-
-// export const App () => {
-//   return (
-//     <div className='App'>
-//       <h1>Ngà</h1>
-//     </div>
-//   )
-// }
