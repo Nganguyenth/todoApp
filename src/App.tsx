@@ -1,5 +1,5 @@
 import React from 'react';
-import Todo from './features/Todo';
+import Todo from './features/Todo'
 
 function App (): JSX.Element {
   return (

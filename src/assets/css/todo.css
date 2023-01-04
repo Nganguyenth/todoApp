@@ -31,7 +31,7 @@ body {
   text-align: center;
 }
 h1 {
-  font-size: 170px;
+  font-size: 40px;
   color: #4DB5A6;
   font-weight: 200;
 }
@@ -46,9 +46,11 @@ h1 {
      color: #fff;
      padding: 8px 32px;
      border-radius: 25px;
+     margin-top: 20px;
 }
 .todo-status-item:nth-child(2){
-    margin: 0 40px;
+    margin: 0 10px;
+    margin-top: 20px;
 }
 .todo-input{
     display: flex;
@@ -85,6 +87,7 @@ h1 {
     width: 100%;
     border: 1px solid #4DB5A6;
     padding: 20px 32px;
+    margin-top: 10px;
 }
 .item-name{
     font-size: 20px;
@@ -106,4 +109,11 @@ h1 {
     color: #4DB5A6;
     margin-top: 10px;
     cursor: pointer;
+}
+.true{
+  background-color: #ccc
+}
+.completed{
+  background-color: lightsalmon;
+  color: #7f7f7f;
 }
