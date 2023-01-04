@@ -31,9 +31,9 @@ body {
   text-align: center;
 }
 h1 {
-  font-size: 40px;
+  font-size: 70px;
   color: #4DB5A6;
-  font-weight: 200;
+  font-weight: 900;
 }
 .todo-status-list {
   display: flex;
@@ -68,7 +68,7 @@ h1 {
     font-size: 20px;
     padding: 8px;
 }
-.todo-input .task__add{
+.todo-input .task-add{
     color: #fff;
     font-size: 24px;
     font-weight: 400;
@@ -85,9 +85,8 @@ h1 {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    border: 1px solid #4DB5A6;
+    border-bottom: 1px solid #4DB5A6;
     padding: 20px 32px;
-    margin-top: 10px;
 }
 .item-name{
     font-size: 20px;
@@ -99,10 +98,11 @@ h1 {
     flex-direction: column;
     align-items: center;
 }
-.task__delete{
-    font-size: 30px;
+.task-delete{
+    font-size: 20px;
     color: #7f7f7f;
     cursor: pointer;
+    flex: 1;
 }
 .task__check{
     font-size: 30px;
@@ -110,10 +110,28 @@ h1 {
     margin-top: 10px;
     cursor: pointer;
 }
-.true{
-  background-color: #ccc
+.task-name{
+  font-size: 30px;
 }
-.completed{
-  background-color: lightsalmon;
-  color: #7f7f7f;
+.active{
+  background-color: #d8d0d5;
+  opacity: 0.2;
+}
+.active .task-name{
+  text-decoration-line: line-through
+}
+.todo-footer{
+  margin-top: 20px;
+}
+.todo-footer button{
+  padding: 16px 32px;
+  font-size: 20px;
+  background-color:#4DB5A6 ;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 500;
+}
+.todo-footer button:hover{
+  color: #21685e ;
 }

@@ -1,26 +1,27 @@
-/* eslint-disable no-fallthrough */
 import React, { useReducer, useRef } from 'react';
+import { faTrash ,faAdd } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../../assets/css/todo.css';
 interface Task {
-  name: string
-  complete: boolean
+  name: string;
+  complete: boolean;
 }
 interface TaskState {
-  task: Task
-  tasks: Task[]
-  taskActive?: number
+  task: Task;
+  tasks: Task[];
+  taskActive?: number;
 }
 interface TaskAction {
-  type: string
-  payload?: string | number
+  type: string;
+  payload?: string | number;
 }
 const initialState = {
   task: {
     name: '',
-    taskState: ''
+    taskState: '',
   },
   tasks: [],
-  taskActive: 0
+  taskActive: 0,
 };
 
 const SET_JOB = 'setJob';
@@ -29,56 +30,57 @@ const REMOVE_JOB = 'removeJob';
 const STATE_JOBS = 'state';
 const REMOVE_ALL = 'removeAll';
 
-function setJob (payload: string): TaskAction {
+function setJob(payload: string): TaskAction {
   return {
     type: SET_JOB,
-    payload
+    payload,
   };
 }
-function addJob (payload: string): TaskAction {
+function addJob(payload: string): TaskAction {
   return {
     type: ADD_JOB,
-    payload
+    payload,
   };
 }
-function remove (payload: number): TaskAction {
+function remove(payload: number): TaskAction {
   return {
     type: REMOVE_JOB,
-    payload
+    payload,
   };
 }
-function complete (payload: number): TaskAction {
+function complete(payload: number): TaskAction {
   return {
     type: STATE_JOBS,
-    payload
+    payload,
   };
 }
-function removeAll (): TaskAction {
+function removeAll(): TaskAction {
   return { type: REMOVE_ALL };
 }
-function reducer (state: TaskState, action: TaskAction): any {
+function reducer(state: TaskState, action: TaskAction): any {
   const { type, payload } = action;
   switch (type) {
-  case SET_JOB: {
-    return {
+    case SET_JOB: {
+      return {
         ...state,
         task: {
           name: payload,
-          complete: false
-        }
+          complete: false,
+        },
       };
     }
     case ADD_JOB: {
-      if (typeof payload === 'string'){
+      if (typeof payload === 'string') {
         const newTask: Task = {
           name: payload,
-          complete: false
+          complete: false,
         };
         return {
           ...state,
-          tasks: [...state.tasks, newTask]
-        };
+          tasks: [...state.tasks, newTask],
+        }
       }
+      break;
     }
     case REMOVE_JOB: {
       const newTask: Task[] = [...state.tasks];
@@ -86,9 +88,14 @@ function reducer (state: TaskState, action: TaskAction): any {
         newTask.splice(payload, 1);
         return {
           ...state,
-          tasks: newTask
+          tasks: newTask,
+          taskActive: newTask.reduce((acc, cur) => {
+            if (cur.complete) acc = acc + 1;
+            return acc;
+          }, 0),
         };
       }
+      break;
     }
     case STATE_JOBS: {
       const newTask: Task[] = [...state.tasks];
@@ -97,58 +104,51 @@ function reducer (state: TaskState, action: TaskAction): any {
           newTask[payload] = {
             ...newTask[payload],
             complete: false,
-          }
+          };
         } else {
           newTask[payload] = {
             ...newTask[payload],
             complete: true,
-          }
+          };
         }
         return {
           ...state,
           tasks: newTask,
-          taskActive: newTask.reduce(
-            (acc, cur) => {
-              if(cur.complete)
-               acc = acc + 1;
-               return (acc);
-            }, 
-         0)
-        }
+          taskActive: newTask.reduce((acc, cur) => {
+            if (cur.complete) acc = acc + 1;
+            return acc;
+          }, 0),
+        };
       }
+      break;
     }
     case REMOVE_ALL: {
-      const newTask : Task[] = []
-      state.tasks.map(task => task.complete ? newTask: newTask.push(task))
-      console.log(newTask);
-      if(newTask.length === state.tasks.length) {
-        return{
+      const newTask: Task[] = [];
+      state.tasks.map((task) => (task.complete ? newTask : newTask.push(task)));
+      if (newTask.length === state.tasks.length) {
+        return {
           ...state,
           tasks: [],
-          taskActive: 0
-        }
+          taskActive: 0,
+        };
       } else {
         return {
           ...state,
           tasks: newTask,
-          taskActive: newTask.reduce(
-            (acc, cur) => {
-              if(cur.complete)
-               acc = acc + 1;
-               return (acc);
-            }, 
-         0)
-        }
+          taskActive: newTask.reduce((acc, cur) => {
+            if (cur.complete) acc = acc + 1;
+            return acc;
+          }, 0),
+        };
       }
     }
   }
 }
-
 const Todo = (): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { task, tasks, taskActive } = state;
   const inputRef = useRef<HTMLInputElement>(null);
-  function handleSubmit (): void {
+  function handleSubmit(): void {
     if (task.name !== '') {
       dispatch(addJob(task.name));
     }
@@ -163,8 +163,12 @@ const Todo = (): JSX.Element => {
       <h1 className="todo-title">To do app</h1>
       <div className="todo-status-list">
         <div className="todo-status-item">All {tasks.length}</div>
-        <div className="todo-status-item">Completed {taskActive} / {tasks.length}</div>
-        <div className="todo-status-item">Active {tasks.length - taskActive} / {tasks.length}</div>
+        <div className="todo-status-item">
+          Completed {taskActive} / {tasks.length}
+        </div>
+        <div className="todo-status-item">
+          Active {tasks.length - taskActive} / {tasks.length}
+        </div>
       </div>
       <div className="todo-input">
         <input
@@ -175,14 +179,14 @@ const Todo = (): JSX.Element => {
             dispatch(setJob(e.target.value));
           }}
         />
-        <div className="task__add" onClick={handleSubmit}>
-          add
+        <div className="task-add" onClick={handleSubmit}>
+        <FontAwesomeIcon icon={faAdd} />
         </div>
       </div>
       <div className="todo-list">
         {tasks.map((task: Task, index: number) => (
           <div
-            className={`todo-list-item ${task.complete.toString()}`}
+            className={`todo-list-item ${task.complete ? 'active' : ''}`}
             key={index}
           >
             <input
@@ -191,20 +195,26 @@ const Todo = (): JSX.Element => {
               onChange={() => dispatch(complete(index))}
               checked={task.complete}
             />
-            <label htmlFor={index.toString()}>{task.name}</label>
+            <label className="task-name" htmlFor={index.toString()}>
+              {task.name.trim()}
+            </label>
             <div className="item-status">
               <div
-                className="task__delete"
+                className="task-delete"
                 onClick={() => dispatch(remove(index))}
               >
-                delete
+                <FontAwesomeIcon icon={faTrash} />
               </div>
             </div>
           </div>
         ))}
       </div>
       <div className="todo-footer">
-        <button onClick={() => dispatch(removeAll())}>{ taskActive > 0 && taskActive < tasks.length ? `Delete ${taskActive} task` : `Delete All` }</button>
+        <button onClick={() => dispatch(removeAll())}>
+          {taskActive > 0 && taskActive < tasks.length
+            ? `Delete ${taskActive} task`
+            : `Delete All`}
+        </button>
       </div>
     </React.Fragment>
   );
