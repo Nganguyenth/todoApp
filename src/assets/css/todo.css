@@ -27,13 +27,18 @@ ul {
   list-style: none;
 }
 body {
-    font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   text-align: center;
+  background-image: url(../image/blue-background.jpg);
+  background-size: cover;
 }
 h1 {
   font-size: 70px;
-  color: #4DB5A6;
+  color: #a8add3;
   font-weight: 900;
+}
+.todo-app{
+  margin-top: 10vh;
 }
 .todo-status-list {
   display: flex;

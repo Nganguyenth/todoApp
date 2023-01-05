@@ -1,17 +1,17 @@
 import React, { useReducer, useRef } from 'react';
-import { faTrash ,faAdd } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faAdd } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../../assets/css/todo.css';
-interface Task {
+export interface Task {
   name: string;
   complete: boolean;
 }
-interface TaskState {
+export interface TaskState {
   task: Task;
   tasks: Task[];
   taskActive?: number;
 }
-interface TaskAction {
+export interface TaskAction {
   type: string;
   payload?: string | number;
 }
@@ -20,7 +20,7 @@ const initialState = {
     name: '',
     taskState: '',
   },
-  tasks: [],
+  tasks: window.localStorage.getItem('task') !== null ? JSON.parse(window.localStorage.getItem('task') || '') : [],
   taskActive: 0,
 };
 
@@ -78,7 +78,7 @@ function reducer(state: TaskState, action: TaskAction): any {
         return {
           ...state,
           tasks: [...state.tasks, newTask],
-        }
+        };
       }
       break;
     }
@@ -151,6 +151,8 @@ const Todo = (): JSX.Element => {
   function handleSubmit(): void {
     if (task.name !== '') {
       dispatch(addJob(task.name));
+    } else {
+      alert('Please enter Task');
     }
     dispatch(setJob(''));
     if (inputRef.current !== null) {
@@ -158,8 +160,9 @@ const Todo = (): JSX.Element => {
       inputRef.current.value = '';
     }
   }
+  window.localStorage.setItem('task', JSON.stringify(tasks));
   return (
-    <React.Fragment>
+    <div className='todo-app'>
       <h1 className="todo-title">To do app</h1>
       <div className="todo-status-list">
         <div className="todo-status-item">All {tasks.length}</div>
@@ -180,7 +183,7 @@ const Todo = (): JSX.Element => {
           }}
         />
         <div className="task-add" onClick={handleSubmit}>
-        <FontAwesomeIcon icon={faAdd} />
+          <FontAwesomeIcon icon={faAdd} />
         </div>
       </div>
       <div className="todo-list">
@@ -216,7 +219,7 @@ const Todo = (): JSX.Element => {
             : `Delete All`}
         </button>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 export default Todo;
