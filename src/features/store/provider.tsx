@@ -1,9 +1,8 @@
 import Context from "./context";
-import { useReducer } from "react";
-import logger from "./logger";
+import React, { useReducer } from "react";
 import {reducer, initialState } from "./reducer";
-function Provider({ children }){
-    const [state, dispatch] = useReducer(logger(reducer), initialState);
+function Provider( {children} : Record<string,React.ReactElement> ){
+    const [state, dispatch] = useReducer((reducer), initialState);
     return(
         <Context.Provider value={[state, dispatch]}>
             {children}
