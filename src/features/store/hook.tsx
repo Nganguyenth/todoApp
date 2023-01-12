@@ -4,4 +4,3 @@ export const useStore = () =>{
     const [state, dispatch] = useContext(ConText)
     return [state, dispatch]
 }
-

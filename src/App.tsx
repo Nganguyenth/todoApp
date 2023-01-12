@@ -1,6 +1,5 @@
-import Todo from './features/Todo'
-
-function App (): JSX.Element {
+import Todo from './features/todo'
+ function App (): JSX.Element {
   return (
     <Todo/>
   );
